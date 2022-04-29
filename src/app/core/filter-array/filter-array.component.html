@@ -1,0 +1,14 @@
+<div>
+    <p>Array pipe :</p>
+    
+   </div>
+   <input type="text" [(ngModel)]="key"/>
+  <div class="input-group my-3">
+  <ul>
+      <li *ngFor="let item of myArray | filter : key" >
+          {{item}}
+      </li>
+  </ul>
+   
+   
+    </div>

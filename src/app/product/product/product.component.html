@@ -1,0 +1,65 @@
+
+<div class="row mt-5">
+    <div class="col-4 p-0 mx-5">
+  <form class="mt- w-100 p-2 card">
+        <p *ngIf="isError" style="color:red">{{error}}</p>
+        <label for="exampleInputEmail1" class="form-label">product</label>
+        <input type="text" name="myProduct.product" class="form-control m-1" [(ngModel)]="myProduct.product_name" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="exampleInputEmail1" class="form-label">code</label>
+        <input type="text" name="myProduct.code"  [(ngModel)]="myProduct.code" class="form-control m-1" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="exampleInputEmail1" class="form-label">available</label>
+        <input type="datetime-local" name="myProduct.availableDate"  [(ngModel)]="myProduct.availableDate" class="form-control m-1" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="exampleInputEmail1" class="form-label">price</label>
+        <input type="text" name="myProduct.price"  [(ngModel)]="myProduct.price" class="form-control m-1" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="exampleInputEmail1" class="form-label">rating</label>
+        <input type="text" name="myProduct.rating"  [(ngModel)]="myProduct.rating" class="form-control m-1" id="exampleInputEmail1" aria-describedby="emailHelp">
+      
+      <button *ngIf="!isEdite" type="button" class="btn btn-primary" (click)=" addNewProduct()">{{form_input}}</button>
+      <button *ngIf="isEdite" type="button" class="btn btn-primary" (click)=" save_updateProduct()">{{form_input}}</button>
+    </form>
+  </div>
+  <div class="col-6"> 
+      <label for='search'style="color:green" class="m-1">search  </label>
+  <input type="search" id="search" [(ngModel)]="key" />
+  <div>
+  <button class='btn btn-primary mt-2' (click)="showImage()" >{{buttonText}}</button></div>
+    <table class="table">
+      <thead>
+        <tr >
+          <th scope="col" *ngIf="hideImages">images</th>
+
+          <th scope="col">id</th>
+          <th scope="col">product</th>
+          <th scope="col">code</th>
+          <th scope="col">available</th>
+          <th scope="col">price</th>
+          <th scope="col">rating</th>
+          <th scope="col">action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr appHighlight *ngFor="let Product of myProducts |filterProduct: key ">
+
+          <td *ngIf="hideImages"><img [src]="Product.image" ></td>
+          <td  >{{Product.id}}</td>
+          <td  >{{Product.product_name }}</td>
+          <td  >{{Product.code | splice}}</td>
+          <td  >{{Product.availableDate | date : 'M/d/yyyy, h:mm a'}}</td>
+          <td  >{{Product.price| currency}}</td>
+          <td  >{{Product.rating}} <app-star [rating]="Product.rating"></app-star></td>
+          <td  class="d-flex justify-content-center"><button type="button" class="btn btn-danger m-1"(click)=" deleteProduct(Product.id)">delete</button>
+            <button type="button" class="btn btn-success m-1"(click)=" updateProduct(Product.id)">edite</button></td>
+          
+        </tr>
+      
+      </tbody>
+    </table>
+    <app-test-splice></app-test-splice>
+    <app-power></app-power>
+    <app-filter-array></app-filter-array>
+
+
+
+  
+  </div>
+  </div>
